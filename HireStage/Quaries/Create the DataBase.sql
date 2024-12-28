@@ -3,9 +3,9 @@ go
 use HireStage
 go
 create table Account(
-	Email nvarchar  constraint ACC_Email_PK primary key, --„«›Ì œ«⁄Ì · —ﬁÌ„Â„ »√—ﬁ«„ ·√‰ ÂÌﬂ ÂÌﬂ «·≈Ì„Ì· „« »Ì ﬂ——
+	Email nvarchar(500)  constraint ACC_Email_PK primary key, --„«›Ì œ«⁄Ì · —ﬁÌ„Â„ »√—ﬁ«„ ·√‰ ÂÌﬂ ÂÌﬂ «·≈Ì„Ì· „« »Ì ﬂ——
 	Name nvarchar(50) constraint ACC_Name_NotNull not null,
-	Pass varchar constraint ACC_Pass_NotNull not null,
+	Pass varchar(50) constraint ACC_Pass_NotNull not null,
 	Selfy image,
 	Type bit constraint ACC_Type_NotNull not null,
 	Des nvarchar(1000), -- ÂÊ‰ ‰»–… ⁄‰ «·‘Œ’ √Ê «·‘—ﬂ… ’«Õ» «·Õ”«»
@@ -15,7 +15,7 @@ create table Account(
 )
 
 create table PhoneNumbers( -- √—ﬁ«„ «·Â« › ·ﬂ· Õ”«»
-	account nvarchar constraint PhNumbers_ACC_FK_Acc_Email foreign key references Account(Email),
+	account nvarchar(500) constraint PhNumbers_ACC_FK_Acc_Email foreign key references Account(Email),
 	number nvarchar(15) constraint PhNumber_Number_NotNull not null
 )
 
@@ -26,9 +26,9 @@ create table Jobs(
 	Sal money constraint Jobs_Sal_NotNull not null,
 	AddDate date constraint Jobs_AddDate_NotNull not null
 	constraint Jobs_AddDate_DateIsNow default getdate(),
-	Owner nvarchar constraint Jobs_Owner_Fk_Acc_Email 
+	Owner nvarchar(500) constraint Jobs_Owner_Fk_Acc_Email 
 	foreign key references Account(Email),
-	Winner nvarchar constraint Jobs_Winner_Fk_Acc_Email 
+	Winner nvarchar(500) constraint Jobs_Winner_Fk_Acc_Email 
 	foreign key references Account(Email)
 )
 
@@ -39,9 +39,9 @@ create table Services (
 	Rent money constraint Ser_Sal_NotNull not null,
 	AddDate date constraint Ser_AddDate_NotNull not null
 	constraint Ser_AddDate_DateIsNow default getdate(),
-	Owner nvarchar constraint Ser_Owner_Fk_Acc_Email 
+	Owner nvarchar(500) constraint Ser_Owner_Fk_Acc_Email 
 	foreign key references Account(Email),
-	Winner nvarchar constraint Ser_Winner_Fk_Acc_Email 
+	Winner nvarchar(500) constraint Ser_Winner_Fk_Acc_Email 
 	foreign key references Account(Email),
 	DToEnd int,
 	ORate int constraint Ser_ORate_Value check(ORate < 6 and ORate > -1),
@@ -52,16 +52,16 @@ create table Services (
 
 create table JSeekeres(
 	JID int constraint JS_ID_FK_JID foreign key references Jobs(ID),
-	Seeker nvarchar constraint JS_Seeker_FK_ACC_Email foreign key references Account(Email),
-	Req nvarchar,
+	Seeker nvarchar(500) constraint JS_Seeker_FK_ACC_Email foreign key references Account(Email),
+	Req nvarchar(1000),
 	ReqDate date default getdate()
 	constraint JS_PK_JID_S primary key(JID, Seeker)
 )
 
 create table SSeekeres(
 	SeekID int constraint SS_ID_FK_JID foreign key references Services(ID),
-	Seeker nvarchar constraint SS_Seeker_FK_ACC_Email foreign key references Account(Email),
-	Req nvarchar,
+	Seeker nvarchar(500) constraint SS_Seeker_FK_ACC_Email foreign key references Account(Email),
+	Req nvarchar(1000),
 	ReqDate date default getdate()
 	constraint SS_PK_SID_S primary key(SeekID, Seeker)
 )
