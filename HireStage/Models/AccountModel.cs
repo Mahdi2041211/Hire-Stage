@@ -6,7 +6,8 @@ namespace HireStage.Models
     {
         public string Name { get; set; }
         public string Email { get; set; }
-        public ImageFileMachine Image {  get; set; }
+        public string Pass {  get; set; }
+        public byte[] Image {  get; set; }
         public string Description { get; set; }
         public Type AccountType { get; set; }
         public string LastProjects { get; set; }
@@ -14,7 +15,7 @@ namespace HireStage.Models
         public List<string> PhoneNumbers { get; set; } = new List<string>();
 
         public AccountModel() { }
-        public AccountModel(string name, string email, ImageFileMachine image, string description, Type accountType, string lastProjects, DateTime hireDate, List<string> phoneNumbers)
+        public AccountModel(string name, string email, byte[] image, string description, Type accountType, string lastProjects, DateTime hireDate, List<string> phoneNumbers)
         {
             Name = name;
             Email = email;

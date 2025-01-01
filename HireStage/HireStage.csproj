@@ -10,4 +10,8 @@
     <Folder Include="Quaries\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.0-preview3.24332.3" />
+  </ItemGroup>
+
 </Project>
